@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        function printReceipt(cartItem) {
+            let mergedCartItem = mergCartItem(cartItem);
+            let caculateSubtotalCartItem = caculatSubtotal(mergedCartItem);
+            let caculateTotalCartItem = caculateTotal(caculateSubtotalCartItem);
+            for(let i in caculateTotalCartItem){
+                if(i.length > 1){
+                    for(let j=0;j<i.length;j++){
+                        console.log(j + ":" + caculateTotalCartItem[i][j]);
+                }
+            } else {
+                    console.log(i + ":" + caculateTotalCartItem[i]);
+                }
+            }
+        }
+
+        function mergCartItem(cartItem) {
+            let mergedCartItem = [];
+            for(let i=0;i<cartItem.length;i++){
+                let temp = mergedCartItemCartItem.find(function (item) {
+                    return item.name === cartItem[i].name;
+                });
+                if(temp){
+                    temp.count++;
+                } else {
+                    mergedCartItem.push(Object.assign({},cartItem[i],{
+                        count:1
+                    }));
+                }
+            }
+            return mergedCartItem;
+        }
+
+        function caculatSubtotal(mergedCartItem) {
+            let caculatSubtotalCartItem = [];
+            for(let i=0;i<mergedCartItem.length;i++){
+                let temp = caculatSubtotalCartItem.find(function(item){
+                   return item.name === mergedCartItem[i].name;
+                });
+                if(temp) {
+                    temp.subtotal += temp.price;
+                } else {
+                     caculatSubtotalCartItem.push(Object.assign({},mergedCartItem[i],{
+                         subtotal:price
+                     }));
+                }
+            }
+            return caculatSubtotalCartItem;
+        }
+
+        function caculateTotal(caculateSubtotalCartItem) {
+            let caculateTotalCartItem = {};
+            for(let i=0;i<caculateSubtotalCartItem.length;i++){
+                let total = 0;
+                total += caculateSubtotalCartItem[i].price;
+            }
+            caculateTotalCartItem = {caculateSubtotalCartItem,total};
+            return caculateTotalCartItem;
+        }
+
+        let cartItem = [{
+                borcode:"Item00001",
+                name:"可口可乐",
+                unit:"瓶",
+                price:3.00
+                },
+
+            {
+                borcode: "Item00002",
+                name: "百事可乐",
+                unit: "瓶",
+                price: 3.00
+            },
+
+            {
+                    borcode:"Item00003",
+                    name:"可口可乐",
+                    unit:"瓶",
+                    price:3.00
+                },];
+
+        console.log(cartItem);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
